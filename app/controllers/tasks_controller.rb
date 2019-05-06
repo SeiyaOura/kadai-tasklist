@@ -57,8 +57,9 @@ class TasksController < ApplicationController
   end
   
   def correct_user
-    @task = current_user.microposts.find_by(id: params[:id])
+    @task = current_user.tasks.find_by(id: params[:id])
     unless @task
+      flash.now[:danger] = '不正なアクセスです'
       redirect_to root_url
     end
   end
